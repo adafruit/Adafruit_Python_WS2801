@@ -16,3 +16,7 @@ Alternatively you can install from pip with:
     sudo pip install adafruit-ws2801
 
 Note that the pip install method **won't** install the example code.
+
+## Pin numbering
+
+The library (and the sample code) use the Broadcom BCM GPIO pin numbering scheme, rather than the physical pin numbering scheme. The [Adafruit T-Cobbler breakout board](https://www.adafruit.com/products/1754), for example, uses the BCM scheme. See [https://pinout.xyz](https://pinout.xyz/) for a quick-reference image.
