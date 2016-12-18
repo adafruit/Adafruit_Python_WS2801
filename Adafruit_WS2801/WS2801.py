@@ -121,7 +121,7 @@ class WS2801Pixels(object):
         change!
         """
         for i in range(self._count):
-            self.set_pixel(i, r, g, b)
+            self.set_pixel_rgb(i, r, g, b)
 
     def clear(self):
         """Clear all the pixels to black/off.  Note you MUST call show() after
