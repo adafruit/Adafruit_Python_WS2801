@@ -30,11 +30,12 @@ def RGB_to_color(r, g, b):
     """
     return ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF)
 
+
 def color_to_RGB(color):
     """Convert a 24-bit color value to 8-bit red, green, blue components.
     Will return a 3-tuple with the color component values.
     """
-    return ((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF)
+    return (color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF
 
 
 class WS2801Pixels(object):
@@ -46,18 +47,18 @@ class WS2801Pixels(object):
         (data output) line for software SPI or a spi instance for hardware SPI.
         """
         self._spi = None
-        if spi is not None:
+        if spi:
             # Handle hardware SPI.
             self._spi = spi
-        elif clk is not None and do is not None:
+        elif clk and do:
             # Handle software SPI.
             # Default to platform GPIO if not provided.
-            if gpio is None:
+            if not gpio:
                 import Adafruit_GPIO as GPIO
                 gpio = GPIO.get_platform_gpio()
             self._spi = SPI.BitBang(gpio, clk, do, None, None)
         else:
-            raise ValueError('Must specify either spi for for hardware SPI or clk, and do for softwrare SPI!')
+            raise ValueError('Must specify either spi for for hardware SPI or clk, and do for software SPI!')
         # Setup SPI interface with up to 20mhz speed.
         self._spi.set_clock_hz(1000000)
         self._spi.set_mode(0)
@@ -92,7 +93,7 @@ class WS2801Pixels(object):
         component values.  Note you MUST call show() after setting pixels to
         see the LEDs change color!
         """
-        assert n >= 0 and n < self._count, 'Pixel n outside the count of pixels!'
+        assert 0 <= n < self._count, 'Pixel n outside the count of pixels!'
         self._pixels[n*3]   = r & 0xFF
         self._pixels[n*3+1] = g & 0xFF
         self._pixels[n*3+2] = b & 0xFF
@@ -106,8 +107,8 @@ class WS2801Pixels(object):
         """Retrieve the 8-bit red, green, blue component color values of the
         specified pixel n.  Will return a 3-tuple of red, green, blue data.
         """
-        assert n >= 0 and n < self._count, 'Pixel n outside the count of pixels!'
-        return (self._pixels[n*3], self._pixels[n*3+1], self._pixels[n*3+2])
+        assert 0 <= n < self._count, 'Pixel n outside the count of pixels!'
+        return self._pixels[n*3], self._pixels[n*3+1], self._pixels[n*3+2]
 
     def set_pixels(self, color=0):
         """Set all pixels to the provided 24-bit RGB color value.  Note you
@@ -128,7 +129,7 @@ class WS2801Pixels(object):
         clearing pixels to see the LEDs change!
         """
         self.set_pixels(0)
-#
+
 # def colorwipe(pixels, c, delay):
 #     for i in range(len(pixels)):
 #         setpixelcolor(pixels, i, c)

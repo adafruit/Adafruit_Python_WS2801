@@ -7,7 +7,6 @@ import time
 
 # Import the WS2801 module.
 import Adafruit_WS2801
-import Adafruit_GPIO.SPI as SPI
 
 
 # Configure the count of pixels:
@@ -21,9 +20,9 @@ PIXEL_DOUT  = 23
 pixels = Adafruit_WS2801.WS2801Pixels(PIXEL_COUNT, clk=PIXEL_CLOCK, do=PIXEL_DOUT)
 
 # Alternatively specify a hardware SPI connection on /dev/spidev0.0:
-#SPI_PORT   = 0
-#SPI_DEVICE = 0
-#pixels = Adafruit_WS2801.WS2801Pixels(PIXEL_COUNT, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+#  SPI_PORT   = 0
+#  SPI_DEVICE = 0
+#  pixels = Adafruit_WS2801.WS2801Pixels(PIXEL_COUNT, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 # Clear all the pixels to turn them off.
 pixels.clear()
@@ -42,7 +41,7 @@ def wheel(pos):
 
 # Define rainbow cycle function to do a cycle of all hues.
 def rainbow_cycle(pixels, wait=0):
-    for j in range(256): # one cycle of all 256 colors in the wheel
+    for j in range(256):  # one cycle of all 256 colors in the wheel
         for i in range(pixels.count()):
             # tricky math! we use each pixel as a fraction of the full 96-color wheel
             # (thats the i / strip.numPixels() part)
