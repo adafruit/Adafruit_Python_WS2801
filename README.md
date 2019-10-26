@@ -1,4 +1,13 @@
-# Adafruit Python WS2801
+# Adafruit Python WS2801 (DEPRECATED)
+
+This library has been archived and replaced by a new library that is Python 3 compatible and works with a wide range of Linux/hardware
+
+https://github.com/adafruit/Adafruit_CircuitPython_WS2801
+
+This library is no longer supported. Please use the new library
+
+
+## Adafruit Python WS2801
 Python code to control WS2801 and similar SPI interface addressable RGB LED strips on a Raspberry Pi &amp; BeagleBone Black.
 
 ## Installation
